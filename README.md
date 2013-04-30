@@ -19,6 +19,28 @@ git init .
 git commit -a -m"jet-pack boilerplate"
 ```
 
+If you use it frequently, you'll prefer to add something like this to your `~/.bash_profile` to automate the process:
+
+```
+function jp()
+{
+  if [ "$1" == "" ]; then
+    echo "Usage:  jp <YOUR-APP-NAME>"
+  else
+    git clone git://github.com/raul/jet-pack.git $1
+    cd $1
+    rm -rf .git
+    bundle
+    git init .
+    git add *
+    git add .gitignore
+    git commit -a -m"jet-pack boilerplate"
+  fi
+}
+```
+
+That way, `jp new-project` will do all the steps above for you.
+
 ## Develop
 
 Start your app with `foreman start` and you're up and flying at [localhost:5000](http://localhost:5000) (you can select a different port by setting a `$PORT` env. var).
